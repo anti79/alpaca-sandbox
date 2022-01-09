@@ -1,0 +1,24 @@
+p {
+	display: block;
+}
+#pf-div {
+	display: block;
+	white-space: pre;
+	font-family: monospace;
+	font-size: 16px;
+
+	border: 1px solid black;
+}
+#controls {
+	display:flex;
+	
+}
+.char-span {
+	cursor:crosshair;
+}
+#main-block {
+	display: flex;
+}
+.code-edit  {
+	height: 100%;
+}
