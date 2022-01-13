@@ -8,12 +8,24 @@ pixelSize = 10
 pf_width = 100
 pf_height = 30
 
+selected_state = pf._default;
 
+function makePalette() {
+	let palette = document.getElementById("palette")
+	states.forEach(state => {
+		let button = document.createElement("button");
+		button.innerText = state;
+		button.addEventListener('click', function() {
+			selected_state = state;
+		});
+		palette.appendChild(button);
+	})
+}
 function onload() {
 	load();
 	makeSpans();
 	draw();
-	
+	makePalette();
 }
 function reset() {
 	pf.clear()
@@ -54,10 +66,10 @@ function step() {
 	new_pf.init();
 }
 
-function putcell(span) {
+function putcell(span, state) {
 	let x = span.id.split(",")[0];
 	let y = span.id.split(",")[1];
-	pf.put(x,y,"Alive");
+	pf.put(x,y,state);
 	draw();
 	console.log({x,y});
 }
@@ -88,7 +100,7 @@ function makeSpans() {
 			span.id = coords;
 			span.className = "char-span"
             span.addEventListener('click', function () {
-                putcell(this);
+                putcell(this, selected_state);
 				
                 console.log(coords);
             });
