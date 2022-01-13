@@ -49,8 +49,25 @@ function evolve_playfield(pf, new_pf) {
 
 		# write the CA's load and dump mappers
 		repr_map = construct_representation_map(self.alpaca)
+
+		# write state ids here
+		
+		first = True
+		self.file.write("var states = [") #TODO: add flag
+		for (char, state_id) in repr_map.items():
+			
+			if not first: 
+				self.file.write(",")
+			if first:
+				first = False
+			self.file.write("\"%s\"" % state_id)
+			
+		self.file.write("];\n")
+		
+
 		self.file.write("function loadMapper(c) {\n")
 		for (char, state_id) in repr_map.items():
+			
 			self.file.write("  if (c === '%s') return '%s';\n" %
 							(char, state_id))
 		self.file.write("};\n")

@@ -20,6 +20,7 @@ function in_nbhd_eq(pf, x, y, stateId, nbhd) {
 function evolve_playfield(pf, new_pf) {
   pf.map(new_pf, evalState, -1, -1, 1, 1);
 }
+var states = ["Dead","Alive"];
 function loadMapper(c) {
   if (c === '-') return 'Dead';
   if (c === '@') return 'Alive';
@@ -38,7 +39,7 @@ return 'Dead';
 
 function eval_Alive(pf, x, y) {
 var id;
-if (((in_nbhd_eq(pf, x, y, 'Alive', [[0,-1],[0,1],[-1,0],[-1,1],[-1,-1],[1,0],[1,1],[1,-1]]) >= 4)||(in_nbhd_eq(pf, x, y, 'Dead', [[0,-1],[0,1],[-1,0],[-1,1],[-1,-1],[1,0],[1,1],[1,-1]]) >= 7))) {
+if ((in_nbhd_eq(pf, x, y, 'Alive', [[0,-1],[0,1],[-1,0],[-1,1],[-1,-1],[1,0],[1,1],[1,-1]]) >= 4)) {
   return 'Dead';
 }
 return 'Alive';
