@@ -5,7 +5,7 @@ new_pf = Playfield();
 new_pf.init();
 
 pixelSize = 10
-pf_width = 50
+pf_width = 100
 pf_height = 30
 
 
@@ -24,8 +24,9 @@ function reset() {
 function load() {
 	pf.load(0,0,"-------\n--@----\n---@---\n-@@@---\n-------\n-------", loadMapper)
 	pf.setDefault("Dead");
-	pf.put(50,30,"Alive")
-	pf.put(50,30,pf._default)
+	
+	pf.put(pf_width,pf_height,"Alive")
+	pf.put(pf_width,pf_height,pf._default)
 	document.getElementById("pf-div").textContent = pf.dump(dumpMapper); 
 }
 function getCursorPosition() {

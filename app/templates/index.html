@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <head>
-<script src ="{{ url_for('static', filename='life1.js') }}"></script>
+<!--<script src ="{{ url_for('static', filename='life1.js') }}"></script>-->
+<script>
+	{{ js_code | safe}}
+</script>
 <script src ="{{ url_for('static', filename='playfield.js') }}"></script>
 <script src ="{{ url_for('static', filename='sandbox.js') }}"></script>
 <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
@@ -13,7 +16,9 @@
 	</div>
 	<div class="d-flex flex-column w-100">
 		<form class="d-flex flex-column h-100" method="post" action="compile">
-		<textarea class="code-edit" name="code"></textarea>
+		<textarea class="code-edit" name="code">
+			{{ alp_code }}
+		</textarea>
 		<button id="compile">Compile</button>
 		</form>
 	</div>

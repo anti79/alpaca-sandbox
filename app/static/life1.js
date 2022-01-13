@@ -38,6 +38,9 @@ return 'Dead';
 
 function eval_Alive(pf, x, y) {
 var id;
+if (((in_nbhd_eq(pf, x, y, 'Alive', [[0,-1],[0,1],[-1,0],[-1,1],[-1,-1],[1,0],[1,1],[1,-1]]) >= 4)||(in_nbhd_eq(pf, x, y, 'Dead', [[0,-1],[0,1],[-1,0],[-1,1],[-1,-1],[1,0],[1,1],[1,-1]]) >= 7))) {
+  return 'Dead';
+}
 return 'Alive';
 }
 
