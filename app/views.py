@@ -62,7 +62,7 @@ function evalState(pf, x, y) {
 @app.route('/', methods=['post', 'get'])
 def index():
 	
-	return render_template('index.html', alp_code=example_alp ,js_code=example_js)
+	return render_template('index.html', alp_code=example_alp ,js_code=example_js, states="var states = [\"Dead\", \"Alive\"]")
 @app.route('/compile', methods=['post','get'])
 def compile():
 	if request.method == 'POST':
