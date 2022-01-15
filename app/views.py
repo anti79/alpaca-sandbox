@@ -73,8 +73,8 @@ def compile():
 		with open("app/static/life1.js", 'w+') as file:
 			file.write(js_code)
 
-	return render_template('index.html', alp_code=code, js_code=js_code)
-
+		return render_template('index.html', alp_code=code, js_code=js_code)
+	return redirect(url_for('index'))
 
 # === User login methods ===
 

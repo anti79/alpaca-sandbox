@@ -73,7 +73,10 @@ var Playfield = function() {
         if (playfield.maxY === undefined || y > playfield.maxY) playfield.maxY = y;
         playfield._store[key] = value;
     };
-
+	playfield.resize = function(x, y) { //TODO:downsize
+		pf.put(pf_width,pf_height,"x")
+		pf.put(pf_width,pf_height,pf._default)
+	}
     /*
      * Like put(), but does not update the playfield bounds.  Do
      * playfield if you must do a batch of put()s in a more efficient

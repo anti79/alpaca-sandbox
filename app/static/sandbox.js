@@ -21,8 +21,11 @@ function makePalette() {
 		palette.appendChild(button);
 	})
 }
+
 function onload() {
-	load();
+	let pagename = location.href.split("/").slice(-1)[0];
+	if(pagename=="") loadExample();
+	else loadEmpty();
 	makeSpans();
 	draw();
 	makePalette();
@@ -30,24 +33,29 @@ function onload() {
 function reset() {
 	pf.clear()
 	new_pf.clear()
-	load()
+	loadExample()
 	draw()
 }
-function load() {
+function loadExample() {
 	pf.load(0,0,"-------\n--@----\n---@---\n-@@@---\n-------\n-------", loadMapper)
 	pf.setDefault("Dead");
-	
-	pf.put(pf_width,pf_height,"Alive")
-	pf.put(pf_width,pf_height,pf._default)
+	pf.resize(pf, pf_height)
 	document.getElementById("pf-div").textContent = pf.dump(dumpMapper); 
 }
-function getCursorPosition() {
-	const rect = document.getElementById("pf-div").getBoundingClientRect();
-	const x = event.clientX - rect.left;
-	const y = event.clientY - rect.top;
-	const pos = {x, y};
-	return pos;
+function loadEmpty() {
+	let loadstring = "";
+	let fill = dumpMapper(states[0]);
+	for(let line=0;line<pf_height;line++) {
+		loadstring += fill.repeat(pf_width);
+		loadstring += '\n';
+	}
+	pf.load(0,0,loadstring, loadMapper);
+	pf.setDefault(states[0]);
+	pf.resize(pf, pf_height)
+	document.getElementById("pf-div").textContent = pf.dump(dumpMapper); 
+	//pf.load()
 }
+
 function draw() {
 	//document.getElementById("pf-div").textContent = pf.dump(dumpMapper); 
 	for(let x=0;x<=pf_height;x++) {
