@@ -13,17 +13,17 @@
 <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
 </head>
 <body onload="onload()">
-	<h1 ><a class="link-dark" href="/">ALPACA Sandbox</a></h1>
+	<h1 class="title"><a href="/">ALPACA Sandbox</a></h1>
 	<div id="main-block">
 	<div id="pf-div" class="charPosition">
 	
 	</div>
 	<div id="editor">
-		<form method="post" action="compile">
+		<form method="post" action="compile" id="editor-form">
 		<textarea class="editor-textarea" name="code" class="textarea">
 			{{ alp_code }}
-		</textarea><br/>
-		<button id="compile">Compile</button>
+		</textarea>
+		<button id="compile-button">Compile</button>
 		</form>
 	</div>
 	</div>
