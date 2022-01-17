@@ -20,33 +20,44 @@ function in_nbhd_eq(pf, x, y, stateId, nbhd) {
 function evolve_playfield(pf, new_pf) {
   pf.map(new_pf, evalState, -1, -1, 1, 1);
 }
-var states = ["Dead","Alive"];
+var states = ["step1","step2","step3"];
 function loadMapper(c) {
-  if (c === '-') return 'Dead';
-  if (c === '@') return 'Alive';
+  if (c === '@') return 'step1';
+  if (c === '$') return 'step2';
+  if (c === '.') return 'step3';
 };
 function dumpMapper(s) {
-  if (s === 'Dead') return '-';
-  if (s === 'Alive') return '@';
+  if (s === 'step1') return '@';
+  if (s === 'step2') return '$';
+  if (s === 'step3') return '.';
 };
-function eval_Dead(pf, x, y) {
+function eval_step1(pf, x, y) {
 var id;
-if (((in_nbhd_eq(pf, x, y, 'Alive', [[0,-1],[0,1],[-1,0],[-1,1],[-1,-1],[1,0],[1,1],[1,-1]]) >= 3)&&(in_nbhd_eq(pf, x, y, 'Dead', [[0,-1],[0,1],[-1,0],[-1,1],[-1,-1],[1,0],[1,1],[1,-1]]) >= 5))) {
-  return 'Alive';
+if ((in_nbhd_eq(pf, x, y, 'step1', [[0,-1],[0,1],[-1,0],[-1,1],[-1,-1],[1,0],[1,1],[1,-1]]) >= 3)) {
+  return 'step2';
 }
-return 'Dead';
+return 'step1';
 }
 
-function eval_Alive(pf, x, y) {
+function eval_step2(pf, x, y) {
 var id;
-if (((in_nbhd_eq(pf, x, y, 'Alive', [[0,-1],[0,1],[-1,0],[-1,1],[-1,-1],[1,0],[1,1],[1,-1]]) >= 4)||(in_nbhd_eq(pf, x, y, 'Dead', [[0,-1],[0,1],[-1,0],[-1,1],[-1,-1],[1,0],[1,1],[1,-1]]) >= 7))) {
-  return 'Dead';
+if ((in_nbhd_eq(pf, x, y, 'step2', [[0,-1],[0,1],[-1,0],[-1,1],[-1,-1],[1,0],[1,1],[1,-1]]) >= 3)) {
+  return 'step3';
 }
-return 'Alive';
+return 'step2';
+}
+
+function eval_step3(pf, x, y) {
+var id;
+if ((in_nbhd_eq(pf, x, y, 'step3', [[0,-1],[0,1],[-1,0],[-1,1],[-1,-1],[1,0],[1,1],[1,-1]]) >= 3)) {
+  return 'step1';
+}
+return 'step3';
 }
 
 function evalState(pf, x, y) {
   var stateId = pf.get(x, y);
-  if (stateId === 'Dead') return eval_Dead(pf, x, y);
-  if (stateId === 'Alive') return eval_Alive(pf, x, y);
+  if (stateId === 'step1') return eval_step1(pf, x, y);
+  if (stateId === 'step2') return eval_step2(pf, x, y);
+  if (stateId === 'step3') return eval_step3(pf, x, y);
 }

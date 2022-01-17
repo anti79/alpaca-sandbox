@@ -21,6 +21,7 @@ a:hover {
 #main-block {
 	display: flex;
 	align-items: stretch;
+	
 }
 #pf-div {
 	display: block;
@@ -29,6 +30,7 @@ a:hover {
 	font-size: 16px;
 	border: 1px solid black;
 }
+
 #editor {
 	display: flex;
 	white-space: pre;
@@ -39,25 +41,20 @@ a:hover {
 	flex:1;
 	align-items: stretch;
 
+
 }
+
 #editor-form {
-	display: flex;
-	flex-flow: column;
-	align-items: stretch;
-	align-content: stretch;
-	align-self: stretch;
-	flex:1;
-}
-.editor-textarea {
-	display: flex;
 	height:100%;
-	align-self: stretch;
+	display:flex;
+	flex-direction: column;
 	flex:1;
 
 }
 #compile-button {
-	
+	flex:1;
 }
+
 #controls {
 	display:flex;
 	

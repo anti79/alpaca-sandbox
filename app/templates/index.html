@@ -6,11 +6,14 @@
 	{{ js_code | safe}}
 	{{ states | safe}}
 </script>
+
 <script src ="{{ url_for('static', filename='playfield.js') }}"></script>
 <script src ="{{ url_for('static', filename='sandbox.js') }}"></script>
-
+<script src ="{{ url_for('static', filename='codemirror.js') }}"></script>
 
 <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
+<link href="{{ url_for('static', filename='codemirror.css') }}" rel="stylesheet" />
+
 </head>
 <body onload="onload()">
 	<h1 class="title"><a href="/">ALPACA Sandbox</a></h1>
@@ -20,7 +23,7 @@
 	</div>
 	<div id="editor">
 		<form method="post" action="compile" id="editor-form">
-		<textarea class="editor-textarea" name="code" class="textarea">
+		<textarea spellcheck="false" class="editor-textarea" id="editor-textarea" name="code" class="textarea">
 			{{ alp_code }}
 		</textarea>
 		<button id="compile-button">Compile</button>
@@ -36,4 +39,9 @@
 	<div id="palette">
 		
 	</div>
+	<script>
+		var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("editor-textarea"), {
+    lineNumbers: true
+  });
+	</script>
 </body>

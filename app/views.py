@@ -1,8 +1,10 @@
+
 from flask import url_for, redirect, render_template, flash, g, session,request
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, lm
 from app.models import User
 import subprocess
+import alpaca
 
 example_alp = """
 /*
@@ -69,10 +71,12 @@ def compile():
 		code = request.form.get('code')
 		with open("code.alp", 'w+') as file:
 			file.write(code)
+		js_code=""
 		js_code = subprocess.check_output(["python", "alpaca/alpaca", "code.alp", "-c", "javascript"]).decode("utf-8")
-		with open("app/static/life1.js", 'w+') as file:
-			file.write(js_code)
-
+		print(js_code[:9])
+		if js_code[:9] == "Exception":
+		
+			return render_template('error.html',error=js_code)
 		return render_template('index.html', alp_code=code, js_code=js_code)
 	return redirect(url_for('index'))
 
