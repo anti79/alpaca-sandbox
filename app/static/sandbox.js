@@ -8,39 +8,54 @@ pixelSize = 10
 pf_width = 150
 pf_height = 30
 
-selected_state = pf._default;
+var palette;
 
-function makePalette() {
-	let palette = document.getElementById("palette")
-	states.forEach(state => {
-		let button = document.createElement("button");
-		button.innerText = state;
-		button.addEventListener('click', function() {
+class Palette {
+	constructor() {
+		this._selected_state = pf._default;
+		this._div = document.getElementById("palette")
+		return this;
+	}
+	createElement() {
+		states.forEach(state => {
+			let button = document.createElement("button");
+			button.innerText = state;
 			
-			selected_state = state;
-			highlightSelected();
-
+			button.addEventListener('click', function() {
+				palette._selected_state = state;
+				palette.highlightSelected();
+	
+			}, this);
+			palette._div.appendChild(button);
+		}, this)
+	}
+	highlightSelected() {
+		let palette = document.getElementById("palette");
+		let buttons = palette.childNodes;
+		buttons.forEach(element => {
+			if(element.innerText==this._selected_state) element.className="palette-button-selected";
+			else element.className="palette-button";
 		});
-		palette.appendChild(button);
-	})
-}
-function highlightSelected() {
-	let palette = document.getElementById("palette");
-	let buttons = palette.childNodes;
-	buttons.forEach(element => {
-		if(element.innerText==selected_state) element.className="palette-button-selected";
-		else element.className="palette-button";
-	});
+			
 		
+	}
+	get selected_state() {
+		return this._selected_state;
+	}
+	set selected_state(val) {
+		this._selected_state = val;
+	}
 	
 }
+
 function onload() {
 	let pagename = location.href.split("/").slice(-1)[0];
 	if(pagename=="") loadExample();
 	else loadEmpty();
 	makeSpans();
 	draw();
-	makePalette();
+	palette = new Palette();
+	palette.createElement();
 }
 function reset() {
 	pf.clear()
