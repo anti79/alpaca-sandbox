@@ -56,6 +56,7 @@ function onload() {
 	draw();
 	palette = new Palette();
 	palette.createElement();
+	palette.highlightSelected();
 }
 function reset() {
 	pf.clear()
@@ -135,7 +136,7 @@ function makeSpans() {
 			span.id = coords;
 			span.className = "char-span"
             span.addEventListener('click', function () {
-                putcell(this, selected_state);
+                putcell(this, palette.selected_state);
 				
                 console.log(coords);
             });
