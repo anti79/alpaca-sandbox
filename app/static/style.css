@@ -67,3 +67,6 @@ a:hover {
 .code-edit  {
 	height: 100%;
 }
+.palette-button-selected {
+	border-color: red;
+}

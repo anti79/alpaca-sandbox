@@ -5,7 +5,7 @@ new_pf = Playfield();
 new_pf.init();
 
 pixelSize = 10
-pf_width = 100
+pf_width = 150
 pf_height = 30
 
 selected_state = pf._default;
@@ -16,12 +16,24 @@ function makePalette() {
 		let button = document.createElement("button");
 		button.innerText = state;
 		button.addEventListener('click', function() {
+			
 			selected_state = state;
+			highlightSelected();
+
 		});
 		palette.appendChild(button);
 	})
 }
-
+function highlightSelected() {
+	let palette = document.getElementById("palette");
+	let buttons = palette.childNodes;
+	buttons.forEach(element => {
+		if(element.innerText==selected_state) element.className="palette-button-selected";
+		else element.className="palette-button";
+	});
+		
+	
+}
 function onload() {
 	let pagename = location.href.split("/").slice(-1)[0];
 	if(pagename=="") loadExample();
