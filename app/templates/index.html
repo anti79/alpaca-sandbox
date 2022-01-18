@@ -9,10 +9,12 @@
 
 <script src ="{{ url_for('static', filename='playfield.js') }}"></script>
 <script src ="{{ url_for('static', filename='sandbox.js') }}"></script>
-<script src ="{{ url_for('static', filename='codemirror.js') }}"></script>
+<script src ="{{ url_for('static', filename='lib/codemirror.js') }}"></script>
+<script src ="{{ url_for('static', filename='lib/simple.js') }}"></script>
+<script src ="{{ url_for('static', filename='lib/alpaca.js') }}"></script>
 
 <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" />
-<link href="{{ url_for('static', filename='codemirror.css') }}" rel="stylesheet" />
+<link href="{{ url_for('static', filename='lib/codemirror.css') }}" rel="stylesheet" />
 
 </head>
 <body onload="onload()">
@@ -41,7 +43,8 @@
 	</div>
 	<script>
 		var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("editor-textarea"), {
-    lineNumbers: true
+    lineNumbers: true,
+	mode: "alpaca"
   });
 	</script>
 </body>
