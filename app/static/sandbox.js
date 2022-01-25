@@ -6,9 +6,12 @@ new_pf.init();
 
 pixelSize = 10
 pf_width = 150
-pf_height = 30
+pf_height = 50
 
+var spans; 
+var timer;
 var palette;
+var new_pf;
 
 class Palette {
 	constructor() {
@@ -19,7 +22,7 @@ class Palette {
 	createElement() {
 		states.forEach(state => {
 			let button = document.createElement("button");
-			button.innerText = state;
+			button.textContent = state;
 			
 			button.addEventListener('click', function() {
 				palette._selected_state = state;
@@ -33,7 +36,7 @@ class Palette {
 		let palette = document.getElementById("palette");
 		let buttons = palette.childNodes;
 		buttons.forEach(element => {
-			if(element.innerText==this._selected_state) element.className="palette-button-selected";
+			if(element.textContent ==this._selected_state) element.className="palette-button-selected";
 			else element.className="palette-button";
 		});
 			
@@ -49,6 +52,7 @@ class Palette {
 }
 
 function onload() {
+	spans = new Array(pf_height+1).fill(0).map(() => new Array(pf_width+1).fill(0));
 	let pagename = location.href.split("/").slice(-1)[0];
 	if(pagename=="") loadExample();
 	else loadEmpty();
@@ -57,6 +61,21 @@ function onload() {
 	palette = new Palette();
 	palette.createElement();
 	palette.highlightSelected();
+
+	document.getElementById("speed").addEventListener("change", function() {
+		stopTimer();
+		setTimer();
+	})
+
+	
+
+}
+function setTimer() {
+	timer = window.setInterval(step, document.getElementById("speed").value);
+
+}
+function stopTimer() {
+	clearInterval(timer);
 }
 function reset() {
 	pf.clear()
@@ -88,18 +107,32 @@ function draw() {
 	//document.getElementById("pf-div").textContent = pf.dump(dumpMapper); 
 	for(let x=0;x<=pf_height;x++) {
 		for(let y=0;y<=pf_width;y++) {
-			let span = document.getElementById(y + "," + x)
-			span.innerText = dumpMapper(pf.get(y,x))
+			let span = spans[x][y]
+			if(span == 0) {
+				spans[x][y] = document.getElementById(y + "," + x)
+			}
+
+
+			span.textContent = dumpMapper(pf.get(y,x))
 		}
 	}
 
 }
+
+new_pf = Playfield();
+new_pf.init();
+
 function step() {
 	evolve_playfield(pf, new_pf);
-	pf = new_pf;
+	for(let x=0;x<=pf_height;x++) {
+		for(let y=0;y<=pf_width;y++) {
+			pf.putDirty(x,y, new_pf.get(x,y));
+		}
+	}
 	draw()
-	new_pf = Playfield();
 	new_pf.init();
+	
+	
 }
 
 function putcell(span, state) {
@@ -116,11 +149,11 @@ function makeSpans() {
 	let x = 0;
 	let y = 0;
     document.querySelectorAll('.charPosition').forEach(el => {
-        let characters = el['innerText'].split('');
-        el.innerHTML = '';
+        let characters = el['textContent'].split('');
+        el.textContent = '';
         characters.forEach(char => {
             let span = document.createElement('span');
-            span.innerText = char;
+            span.textContent = char;
 			if(char=='\n') {
 				currentLine++;
 				el.appendChild(span);
@@ -140,6 +173,7 @@ function makeSpans() {
 				
                 console.log(coords);
             });
+			//spans[x][y] = span;
             el.appendChild(span);
         });
     });

@@ -34,10 +34,11 @@
 	</div>
 	</div>
 	<div id="controls">
-	<button id="start" onclick="step()">Step</button><br/>
-   	<button id="run" onclick="timer = window.setInterval(step, 100);">Start</button><br/>
-   	<button id="stop" onclick="clearInterval(timer)">Stop</button><br/>
-   	<button id="clear" onclick="reset()">Clear</button>
+	<button id="start" class="btn btn-class-primary" onclick="step()">Step</button><br/>
+   	<button id="run"  class="btn btn-class-primary"onclick="setTimer()">Start</button><br/>
+   	<button id="stop" class="btn btn-class-primary" onclick="stopTimer()">Stop</button><br/>
+   	<button id="clear" class="btn btn-class-primary" onclick="reset()">Clear</button>
+	<input type="range" id="speed" min="10" max="200"/>
 	</div>
 	<div id="palette">
 		

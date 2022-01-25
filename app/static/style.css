@@ -1,6 +1,10 @@
 html {
 	font-family: Arial, Helvetica, sans-serif;
 }
+body {
+	background-color: #eeeeee;
+	padding: 1%;
+}
 p {
 	display: block;
 }
@@ -20,7 +24,10 @@ a:hover {
 }
 #main-block {
 	display: flex;
-	align-items: stretch;
+	align-content: start;
+	overflow:hidden;
+	border-radius: 0.5%;
+	border: 1px solid black;
 	
 }
 #pf-div {
@@ -28,7 +35,8 @@ a:hover {
 	white-space: pre;
 	font-family: monospace;
 	font-size: 16px;
-	border: 1px solid black;
+	border-right: 1px double black;
+	background-color: white;
 }
 
 #editor {
@@ -37,7 +45,7 @@ a:hover {
 	flex-flow: column;
 	font-family: monospace;
 	font-size: 16px;
-	border: 1px solid black;
+	
 	flex:1;
 	align-items: stretch;
 
@@ -54,7 +62,9 @@ a:hover {
 #compile-button {
 	flex:1;
 }
-
+.btn {
+	background-color:unset;
+}
 #controls {
 	display:flex;
 	
