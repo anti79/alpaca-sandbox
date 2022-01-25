@@ -29,15 +29,18 @@
 		<textarea spellcheck="false" class="editor-textarea" id="editor-textarea" name="code" class="textarea">
 			{{ alp_code }}
 		</textarea>
-		<button id="compile-button">Compile</button>
+		<div id="code-buttons">
+		<button id="compile-button" class="btn">Run</button>
+		<button id="download-button" class="btn">Download code</button>
+		</div>
 		</form>
 	</div>
 	</div>
 	<div id="controls">
-	<button id="start" class="btn btn-class-primary" onclick="step()">Step</button><br/>
-   	<button id="run"  class="btn btn-class-primary"onclick="setTimer()">Start</button><br/>
-   	<button id="stop" class="btn btn-class-primary" onclick="stopTimer()">Stop</button><br/>
-   	<button id="clear" class="btn btn-class-primary" onclick="reset()">Clear</button>
+	<button id="start" class="btn btn-class-primary" onclick="step()">➡️ Step</button><br/>
+   	<button id="run"  class="btn btn-class-primary"onclick="setTimer()">▶️ Start</button><br/>
+   	<button id="stop" class="btn btn-class-primary" onclick="stopTimer()">⏹ Stop</button><br/>
+   	<button id="clear" class="btn btn-class-primary" onclick="reset()">❌ Clear</button>
 	
 	<input type="range" id="speed" min="10" max="200" />
 	<div class="d-flex align-items-center ms-1" id="speed-value">100 ms</div>

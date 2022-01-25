@@ -1,8 +1,7 @@
 pf = Playfield();
 pf.init();
 
-new_pf = Playfield();
-new_pf.init();
+
 
 pixelSize = 10
 pf_width = 150
@@ -113,7 +112,7 @@ function loadEmpty() {
 }
 
 function draw() {
-	//document.getElementById("pf-div").textContent = pf.dump(dumpMapper); 
+	/*
 	for(let x=0;x<=pf_height;x++) {
 		for(let y=0;y<=pf_width;y++) {
 			let span = spans[x][y]
@@ -124,14 +123,21 @@ function draw() {
 
 			span.textContent = dumpMapper(pf.get(y,x))
 		}
+	}*/
+	for(let x=0;x<=pf_height;x++) {
+		for(let y=0;y<=pf_width;y++) {
+			let span = document.getElementById(y + "," + x)
+			span.innerText = dumpMapper(pf.get(y,x))
+		}
 	}
 
 }
 
-new_pf = Playfield();
-new_pf.init();
+
 
 function step() {
+	new_pf = Playfield();
+new_pf.init();
 	evolve_playfield(pf, new_pf);
 	for(let x=0;x<=pf_height;x++) {
 		for(let y=0;y<=pf_width;y++) {
