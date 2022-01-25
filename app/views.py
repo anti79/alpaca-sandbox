@@ -76,7 +76,7 @@ def compile():
 		print(js_code[:9])
 		if js_code[:9] == "Exception":
 		
-			return render_template('error.html',error=js_code)
+			return render_template('index.html',error=js_code,alp_code=code)
 		return render_template('index.html', alp_code=code, js_code=js_code)
 	return redirect(url_for('index'))
 

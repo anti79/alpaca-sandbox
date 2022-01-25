@@ -22,7 +22,7 @@
 	<h1 class="title"><a href="/">ALPACA Sandbox</a></h1>
 	<div id="main-block">
 	<div id="pf-div" class="charPosition">
-	
+	<span class="error-msg">{{ error }}</span>
 	</div>
 	<div id="editor">
 		<form method="post" action="compile" id="editor-form">
@@ -38,8 +38,10 @@
    	<button id="run"  class="btn btn-class-primary"onclick="setTimer()">Start</button><br/>
    	<button id="stop" class="btn btn-class-primary" onclick="stopTimer()">Stop</button><br/>
    	<button id="clear" class="btn btn-class-primary" onclick="reset()">Clear</button>
-	<input type="range" id="speed" min="10" max="200"/>
 	
+	<input type="range" id="speed" min="10" max="200" />
+	<div class="d-flex align-items-center ms-1" id="speed-value">100 ms</div>
+	<div class="vr"></div>
 	<div id="palette">
 		
 	</div>

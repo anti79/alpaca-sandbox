@@ -13,6 +13,9 @@ var timer;
 var palette;
 var new_pf;
 
+var timer_ms = 100;
+var running = false;
+
 class Palette {
 	constructor() {
 		this._selected_state = pf._default;
@@ -36,8 +39,8 @@ class Palette {
 		let palette = document.getElementById("palette");
 		let buttons = palette.childNodes;
 		buttons.forEach(element => {
-			if(element.textContent ==this._selected_state) element.classList[1]="palette-button-selected";
-			else element.classList[1]="palette-button";
+			if(element.textContent ==this._selected_state) element.className+=" palette-button-selected";
+			else element.className="btn";
 		});
 			
 		
@@ -63,19 +66,25 @@ function onload() {
 	palette.highlightSelected();
 
 	document.getElementById("speed").addEventListener("change", function() {
-		stopTimer();
-		setTimer();
+		timer_ms = this.value;
+		if(running) {
+			clearInterval(timer);
+			timer = window.setInterval(step, timer_ms)
+		}
+		
+		document.getElementById("speed-value").textContent=this.value+" ms";
 	})
 
 	
 
 }
 function setTimer() {
-	timer = window.setInterval(step, document.getElementById("speed").value);
-
+	timer = window.setInterval(step, timer_ms);
+	running = true;
 }
 function stopTimer() {
 	clearInterval(timer);
+	running = false;
 }
 function reset() {
 	pf.clear()
