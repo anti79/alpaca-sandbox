@@ -6,7 +6,7 @@ new_pf.init();
 
 pixelSize = 10
 pf_width = 150
-pf_height = 50
+pf_height = 40
 
 var spans; 
 var timer;
@@ -23,7 +23,7 @@ class Palette {
 		states.forEach(state => {
 			let button = document.createElement("button");
 			button.textContent = state;
-			
+			button.classList.add("btn");
 			button.addEventListener('click', function() {
 				palette._selected_state = state;
 				palette.highlightSelected();
@@ -36,8 +36,8 @@ class Palette {
 		let palette = document.getElementById("palette");
 		let buttons = palette.childNodes;
 		buttons.forEach(element => {
-			if(element.textContent ==this._selected_state) element.className="palette-button-selected";
-			else element.className="palette-button";
+			if(element.textContent ==this._selected_state) element.classList[1]="palette-button-selected";
+			else element.classList[1]="palette-button";
 		});
 			
 		
