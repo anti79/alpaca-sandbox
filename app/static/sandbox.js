@@ -1,6 +1,7 @@
 pf = Playfield();
 pf.init();
-
+new_pf = Playfield();
+new_pf.init();
 
 
 pixelSize = 10
@@ -136,8 +137,9 @@ function draw() {
 
 
 function step() {
+	/*
 	new_pf = Playfield();
-new_pf.init();
+	new_pf.init();
 	evolve_playfield(pf, new_pf);
 	for(let x=0;x<=pf_height;x++) {
 		for(let y=0;y<=pf_width;y++) {
@@ -146,7 +148,12 @@ new_pf.init();
 	}
 	draw()
 	new_pf.init();
-	
+	*/
+	evolve_playfield(pf, new_pf);
+	pf = new_pf;
+	draw()
+	new_pf = Playfield();
+	new_pf.init();
 	
 }
 
