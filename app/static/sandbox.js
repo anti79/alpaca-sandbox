@@ -87,10 +87,12 @@ function stopTimer() {
 	running = false;
 }
 function reset() {
-	pf.clear()
-	new_pf.clear()
-	loadExample()
-	draw()
+	for(let x=0;x<=pf_height;x++) {
+		for(let y=0;y<=pf_width;y++) {
+			pf.putDirty(y,x,states[0]);
+		}
+	}
+	draw();
 }
 function loadExample() {
 	pf.load(0,0,"-------\n--@----\n---@---\n-@@@---\n-------\n-------", loadMapper)

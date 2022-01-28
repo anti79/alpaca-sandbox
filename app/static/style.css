@@ -8,6 +8,11 @@ body {
 p {
 	display: block;
 }
+#header {
+	display:flex;
+	align-items: stretch;
+	justify-content: space-between;
+}
 .title {
 	color: black;
 	text-decoration: none;
@@ -104,4 +109,8 @@ a:hover {
 	display: flex;
 	flex-direction: row;
 	font-family: Arial, Helvetica, sans-serif;
+	
+}
+#compile-button, #download-button {
+	padding: 5px;
 }
